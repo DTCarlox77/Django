@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Búsqueda
+{% endblock title %}
+
+
+{% block body %}
+    
+<div class="container">
+    <h1>Búsqueda de usuarios</h1>
+    <hr>
+    
+    {% if mensaje %}
+        <div class="alert alert-primary">
+            <h4>{{ mensaje }}</h4>
+            <ul>
+                {% for subcadena in subcadenas %}
+                    <li><a href="{% url 'user' nombre=subcadena %}"><h4>{{ subcadena }}</h4></a></li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    {% endif %}
+        
+    <hr>
+    <form action="{% url 'search' %}" method="post">
+        {% csrf_token %}
+        <input class="form form-control" type="text" placeholder="Nombre del usuario" name="nombre">
+        <br>
+        <button type="submit" class="btn btn-outline-success">Buscar usuario</button>
+    </form>
+</div>
+
+{% endblock body %}
+    

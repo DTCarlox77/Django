@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Página de nombres{% endblock title %}    
+
+{% block body %}
+        
+<div class="container">
+
+    <h1>Página de nombres</h1>
+    <hr>
+
+    {% if mensaje %}
+        <div class="alert {% if tipo == 'Correcto' %}alert-success{% else %}alert-danger{% endif %}">
+            <h4>{{ tipo }}</h4>
+            <p>{{ mensaje }}</p>
+        </div>
+        <br>
+    {% endif %}
+
+
+    <form action="{% url 'main' %}" method="post">
+        {% csrf_token %}
+        <input name="nombre" type="text" class="input form-control" placeholder="Introduce tu nombre">
+        <br>
+        <button type="submit" class="btn btn-outline-primary">Registrar nombre</button>
+    </form>
+</div>
+<hr>
+<div class="container">
+    <h1>Listado de nombres</h1>
+    <hr>
+    <ul>
+        {% for nombre in nombres %}
+            <li><a href="{% url 'user' nombre=nombre %}"><h4>{{ nombre }}</h4></a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock body %}
